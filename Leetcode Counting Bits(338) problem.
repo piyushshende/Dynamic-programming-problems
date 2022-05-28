@@ -1,0 +1,58 @@
+Problem Statement:
+Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
+
+ Example 1:
+
+Input: n = 2
+Output: [0,1,1]
+Explanation:
+0 --> 0
+1 --> 1
+2 --> 10
+Example 2:
+
+Input: n = 5
+Output: [0,1,1,2,1,2]
+Explanation:
+0 --> 0
+1 --> 1
+2 --> 10
+3 --> 11
+4 --> 100
+5 --> 101
+ 
+
+Constraints:
+
+0 <= n <= 105
+
+
+
+
+Solution:
+We know that the binary of a number is formed by using the sequence 2,4,8,16 ans so on. So whenever we come across a number of such sequence the answer is always going to be one.
+But what if the number is not of sequence, like number 6 or 7 is not of such sequence? So for this we will make an array of length (n+1) by initialising index 0 by 0 and index 1 by 1.
+Now the value of further indexes will be the addition of the number at i/2 position and the number at i%2 position i.e,
+
+arr[i] = arr[i/2]+arr[i%2];
+
+Hence, this array will be the answer.
+
+Programming solution:
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        if(n==0) return {0};
+        vector<int> arr(n+1);
+        arr[0] = 0;
+        arr[1] = 1;
+        for(int i=2;i<n+1;i++)
+        {
+            arr[i] = (arr[i/2]+arr[i%2]);
+        }
+        return arr;
+    }
+};
+
+Time complexity: O(n+1);
+
